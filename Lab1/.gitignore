@@ -1,0 +1,51 @@
+# --- Python cache files ---
+__pycache__/
+*.py[cod]
+*.pyo
+
+# --- Virtual environments ---
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# --- Distribution / packaging ---
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# --- PyInstaller ---
+*.manifest
+*.spec
+
+# --- Unit test / coverage ---
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+
+# --- Jupyter Notebook checkpoints ---
+.ipynb_checkpoints/
+
+# --- Django / Flask ---
+*.log
+local_settings.py
+instance/
+*.sqlite3
+
+# --- Environment / secrets ---
+*.env
+*.ini
+*.cfg
+
+# --- IDE / editor files ---
+.vscode/
+.idea/
+*.swp
+*.swo
