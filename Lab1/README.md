@@ -7,13 +7,13 @@
 
 ### Програмне забезпечення
 
-- Python 3.11 або 3.12.
+- Стабільна версія Python, новіша за 3.13.
 - NumPy — робота з масивами та обчислення норм через `numpy.linalg.norm`.
 - SciPy — обчислення векторних і рядкових норм через `scipy.linalg.norm`.
 - scikit-learn — масштабування ознак через `MinMaxScaler` і відстані Мінковського через `pairwise_distances`.
 - PyTorch — обчислення норм тензорів через `torch.linalg.vector_norm`.
 
-Усі бібліотеки обчислюють норми для того самого вектора й того самого набору даних. Не використовуйте попередні (alpha) версії Python: для них можуть бути недоступні сумісні версії пакетів.
+Усі бібліотеки обчислюють норми для того самого вектора й того самого набору даних. Використовуйте стабільний реліз Python, новіший за 3.13; alpha-, beta- та release-candidate версії не підходять.
 
 ### Структура проєкту
 
@@ -30,41 +30,56 @@
 
 Відкрийте у VS Code папку проєкту `Lab1`, потім виберіть **Terminal → New Terminal**. Усі команди вводьте в PowerShell з папки проєкту.
 
-1. Перевірте наявність Python 3.12:
+1. Перевірте встановлені версії Python:
 
 ```powershell
 py -0p
 ```
 
-Якщо Python 3.12 встановлено, створіть віртуальне середовище:
+Виберіть стабільний інтерпретатор із версією новішою за 3.13. Якщо користуєтеся UV, установіть актуальний стабільний Python 3 та створіть середовище:
 
 ```powershell
-py -3.12 -m venv .venv
+uv python install 3
+$pythonPath = uv python find 3
+& $pythonPath -c "import sys; assert sys.version_info > (3, 13), 'Потрібен стабільний Python новіший за 3.13'; print(sys.version)"
+& $pythonPath -m venv .venv-stable
 ```
 
-Якщо у списку є Python 3.11, можна використати його, замінивши `3.12` на `3.11`. Якщо доступна лише версія 3.14 alpha, спочатку встановіть стабільну версію Python 3.11 або 3.12.
+Якщо UV не використовується, візьміть зі списку `py -0p` шлях до стабільного `python.exe` із версією новішою за 3.13 і створіть середовище командою:
+
+```powershell
+& "<шлях до стабільного python.exe>" -m venv .venv-stable
+```
+
+Виконайте лише один із варіантів створення середовища. Якщо `.venv-stable` уже існує, перевірте його версію й не створюйте повторно. Не використовуйте середовище на базі alpha-, beta- або release-candidate версії Python.
+
+Перевірте версію створеного інтерпретатора; вона має бути новішою за 3.13:
+
+```powershell
+.\.venv-stable\Scripts\python.exe --version
+```
 
 2. Установіть бібліотеки та pytest у створене середовище:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install --upgrade pip
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv-stable\Scripts\python.exe -m pip install --upgrade pip
+.\.venv-stable\Scripts\python.exe -m pip install -r requirements-dev.txt
 ```
 
 3. Перевірте імпорт бібліотек і запустіть приклад:
 
 ```powershell
-.\.venv\Scripts\python.exe -c "import numpy, scipy, sklearn, torch; print(numpy.__version__, scipy.__version__, sklearn.__version__, torch.__version__)"
-.\.venv\Scripts\python.exe main.py
-.\.venv\Scripts\python.exe -m pytest --collect-only -q
+.\.venv-stable\Scripts\python.exe -c "import numpy, scipy, sklearn, torch; print(numpy.__version__, scipy.__version__, sklearn.__version__, torch.__version__)"
+.\.venv-stable\Scripts\python.exe main.py
+.\.venv-stable\Scripts\python.exe -m pytest --collect-only -q
 ```
 
-У VS Code виберіть створене середовище через **Ctrl+Shift+P → Python: Select Interpreter → `.venv`**. Після цього файл можна запускати кнопкою **Run Python File**.
+У VS Code виберіть створене середовище через **Ctrl+Shift+P → Python: Select Interpreter → `.venv-stable`**. Після цього файл можна запускати кнопкою **Run Python File**.
 
 Якщо з'явилася помилка `No module named ...`, перевірте вибране середовище та повторіть установлення залежностей:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\.venv-stable\Scripts\python.exe -m pip install -r requirements-dev.txt
 ```
 
 ## Перевірка тестами
@@ -72,8 +87,8 @@ py -3.12 -m venv .venv
 Запускайте команди з кореневої папки проєкту через те саме віртуальне середовище:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest --collect-only -q
-.\.venv\Scripts\python.exe -m pytest -v
+.\.venv-stable\Scripts\python.exe -m pytest --collect-only -q
+.\.venv-stable\Scripts\python.exe -m pytest -v
 ```
 
 - `tests/test_template.py` — короткий приклад перевірки власної реалізації NumPy та некоректних аргументів.
@@ -83,19 +98,19 @@ py -3.12 -m venv .venv
 Після виконання TODO 2 можна перевірити навчальний приклад окремо:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest tests/test_template.py -v
+.\.venv-stable\Scripts\python.exe -m pytest tests/test_template.py -v
 ```
 
 Після реалізації TODO 2–7 перевірте повне рішення окремим набором:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest tests/test_implementation.py -v
+.\.venv-stable\Scripts\python.exe -m pytest tests/test_implementation.py -v
 ```
 
 Перед здаванням запустіть усі тести разом:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pytest -v
+.\.venv-stable\Scripts\python.exe -m pytest -v
 ```
 
 Поки відповідний TODO не реалізовано, тести для цієї функції завершуватимуться помилкою `NotImplementedError`. Це очікувана проміжна поведінка. Результат вважається готовим, коли всі TODO реалізовано та повний запуск pytest завершився без помилок.
@@ -122,11 +137,11 @@ $$
 2. Відкрийте `student_template.py` і самостійно реалізуйте завдання 1–7 у порядку номерів у коментарях `TODO`. Не змінюйте тести й фікстури.
 3. Після виконання TODO 2 запустіть `tests/test_template.py`. Перевірте, що власна функція NumPy збігається з незалежним еталоном і відхиляє некоректні аргументи.
 4. Після виконання TODO 2–7 запустіть `tests/test_implementation.py`. Виправляйте реалізацію, доки перевірки обчислень, валідації, масштабування, центрування та Iris не пройдуть.
-5. Запустіть повний набір інтерпретатором із віртуального середовища: `.\.venv\Scripts\python.exe -m pytest -v`. Усі тести мають пройти.
+5. Запустіть повний набір інтерпретатором із віртуального середовища: `.\.venv-stable\Scripts\python.exe -m pytest -v`. Усі тести мають пройти.
 6. Після реалізації функцій також запустіть шаблон:
 
 ```powershell
-.\.venv\Scripts\python.exe student_template.py
+.\.venv-stable\Scripts\python.exe student_template.py
 ```
 
 До завершення реалізацій шаблон може зупинятися з `NotImplementedError`. Після заповнення всіх `TODO` програма має завершитися та вивести порівняння бібліотек і результати для Iris.
@@ -136,7 +151,7 @@ $$
 Щоб переглянути повний зразок виконання, запустіть окремий файл:
 
 ```powershell
-.\.venv\Scripts\python.exe solution.py
+.\.venv-stable\Scripts\python.exe solution.py
 ```
 
 У ньому наведено ручну формулу, реалізації NumPy та PyTorch, порівняння SciPy і scikit-learn, а також аналіз Iris. Використовуйте цей файл для перевірки власного розв'язання після виконання завдань.
