@@ -48,6 +48,16 @@ def row_norms_scipy(data: np.ndarray, order: int) -> np.ndarray:
     raise NotImplementedError("Виконайте TODO 3: обчислення норм SciPy.")
 
 
+def vector_norm_scipy(vector: np.ndarray, order: int) -> float:
+    """Обчислює норму вектора за допомогою SciPy."""
+    validate_order(order)
+    if vector.ndim != 1:
+        raise ValueError("Очікувався одновимірний вектор.")
+
+    # TODO 3: обчисліть норму через scipy.linalg.norm із заданим порядком.
+    raise NotImplementedError("Виконайте TODO 3: норма вектора SciPy.")
+
+
 def scale_features(
     data: np.ndarray,
     feature_range: tuple[float, float],
@@ -109,6 +119,21 @@ def compare_libraries(data: np.ndarray, title: str) -> dict[int, np.ndarray]:
     return results_by_order
 
 
+def top_five_observations(
+    scores: np.ndarray,
+    labels: np.ndarray,
+    target_names: np.ndarray,
+) -> list[tuple[int, str, float]]:
+    """Повертає індекс, назву виду й оцінку для п'яти найбільших норм."""
+    if scores.ndim != 1 or labels.ndim != 1:
+        raise ValueError("Оцінки й мітки мають бути одновимірними масивами.")
+    if len(scores) != len(labels):
+        raise ValueError("Кількість оцінок має збігатися з кількістю міток.")
+
+    # TODO 7: знайдіть п'ять найбільших оцінок і зіставте їх із назвами видів.
+    raise NotImplementedError("Виконайте TODO 7: вибір топ-5 спостережень.")
+
+
 def main() -> None:
     """Виконує завдання лабораторної роботи в заданій послідовності."""
     # TODO 1: вручну обчисліть норми цього вектора та запишіть їх у звіт.
@@ -119,6 +144,10 @@ def main() -> None:
     for order in NORM_ORDERS:
         print(f"L{order} NumPy:", np.linalg.norm(sample, ord=order))
         print(f"L{order} власна реалізація:", manual_lp_norm_numpy(sample, order))
+
+    # TODO 3: порівняйте норму вектора SciPy з результатом NumPy.
+    for order in NORM_ORDERS:
+        print(f"L{order} SciPy:", vector_norm_scipy(sample, order))
 
     # TODO 5: створіть тензор із sample і порівняйте обидва обчислення PyTorch.
     sample_tensor = torch.as_tensor(sample.copy(), dtype=torch.float64)
@@ -145,15 +174,17 @@ def main() -> None:
     centered = scaled - scaled.mean(axis=0)
     centered_scores = compare_libraries(centered, "Центровані ознаки Iris")
 
-    # TODO 7: для кожної норми виведіть п'ять найбільших індексів,
-    # назви видів з iris.target_names та значення відповідних норм.
+    # TODO 7: виведіть результати методу top_five_observations для кожної норми.
     for order, scores in centered_scores.items():
         print(f"\nП'ять найбільших відхилень для L{order}:")
-        largest_indices = np.argsort(scores)[-5:][::-1]
-        for index in largest_indices:
+        observations = top_five_observations(
+            scores,
+            iris.target,
+            iris.target_names,
+        )
+        for index, species, score in observations:
             print(
-                f"індекс={index}, вид={iris.target_names[iris.target[index]]}, "
-                f"норма={scores[index]:.4f}"
+                f"індекс={index}, вид={species}, норма={score:.4f}"
             )
 
 

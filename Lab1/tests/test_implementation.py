@@ -6,7 +6,7 @@ import numpy as np
 import pytest
 import torch
 
-import student_template as implementation
+import solution as implementation
 
 
 @pytest.mark.parametrize(
@@ -28,6 +28,18 @@ def test_manual_norms_match_independent_reference(
     actual = function(values, norm_order)
     if isinstance(actual, torch.Tensor):
         actual = actual.item()
+    expected = reference_lp_norm(vector_case, norm_order)
+
+    assert actual == pytest.approx(expected)
+
+
+def test_scipy_vector_norm_matches_independent_reference(
+    vector_case: np.ndarray,
+    norm_order: int,
+    reference_lp_norm,
+) -> None:
+    """Перевіряє окреме обчислення векторної норми SciPy."""
+    actual = implementation.vector_norm_scipy(vector_case, norm_order)
     expected = reference_lp_norm(vector_case, norm_order)
 
     assert actual == pytest.approx(expected)
@@ -79,6 +91,7 @@ def test_feature_scaling_matches_independent_formula(
     (
         "manual_lp_norm_numpy",
         "manual_lp_norm_torch",
+        "vector_norm_scipy",
         "row_norms_numpy",
         "row_norms_scipy",
         "row_norms_sklearn",
@@ -122,6 +135,12 @@ def test_manual_norms_reject_matrices(
         function(values, order=2)
 
 
+def test_scipy_vector_norm_rejects_matrices(matrix_data: np.ndarray) -> None:
+    """Перевіряє, що векторна функція SciPy приймає лише вектори."""
+    with pytest.raises(ValueError, match="одновимірний вектор"):
+        implementation.vector_norm_scipy(matrix_data, order=2)
+
+
 @pytest.mark.parametrize(
     "function_name",
     (
@@ -152,7 +171,7 @@ def test_iris_comparison_matches_reference_for_each_order(
     capsys: pytest.CaptureFixture[str],
 ) -> None:
     """Перевіряє інтеграційне порівняння бібліотек на Iris."""
-    actual_by_order = implementation.compare_libraries(
+    actual_by_order = implementation.compare_row_norms(
         centered_iris_features,
         "Перевірка Iris у тесті",
     )
@@ -167,6 +186,30 @@ def test_iris_comparison_matches_reference_for_each_order(
             rtol=1e-6,
             atol=1e-8,
         )
+
+
+def test_top_five_observations_match_reference_ranking(
+    iris_dataset,
+    centered_iris_features: np.ndarray,
+    reference_row_norms,
+) -> None:
+    """Перевіряє динамічне ранжування п'яти найбільших норм."""
+    scores = reference_row_norms(centered_iris_features, order=2)
+    actual = implementation.top_five_observations(
+        scores,
+        iris_dataset.target,
+        iris_dataset.target_names,
+    )
+    expected_indices = np.argsort(scores)[-5:][::-1]
+
+    assert len(actual) == len(expected_indices)
+    for (index, species, score), expected_index in zip(actual, expected_indices):
+        expected_species = iris_dataset.target_names[
+            iris_dataset.target[expected_index]
+        ]
+        assert index == expected_index
+        assert species == expected_species
+        assert score == pytest.approx(scores[expected_index])
 
 
 def test_main_reports_reference_top_five_iris_observations(

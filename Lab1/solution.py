@@ -50,6 +50,14 @@ def vector_norms_scipy(vector: np.ndarray) -> dict[int, float]:
     }
 
 
+def vector_norm_scipy(vector: np.ndarray, order: int) -> float:
+    """Обчислює норму одного вектора засобами SciPy."""
+    validate_order(order)
+    if vector.ndim != 1:
+        raise ValueError("Очікувався одновимірний вектор.")
+    return float(scipy_norm(vector, ord=order))
+
+
 def vector_norms_sklearn(vector: np.ndarray) -> dict[int, float]:
     """Обчислює відстань вектора до нуля засобами scikit-learn."""
     return {
@@ -69,18 +77,24 @@ def vector_norms_torch(vector: torch.Tensor) -> dict[int, float]:
 def row_norms_numpy(data: np.ndarray, order: int) -> np.ndarray:
     """Обчислює норму кожного рядка за допомогою NumPy."""
     validate_order(order)
+    if data.ndim != 2:
+        raise ValueError("Очікувалася двовимірна матриця.")
     return np.linalg.norm(data, ord=order, axis=1)
 
 
 def row_norms_scipy(data: np.ndarray, order: int) -> np.ndarray:
     """Обчислює норму кожного рядка за допомогою SciPy."""
     validate_order(order)
+    if data.ndim != 2:
+        raise ValueError("Очікувалася двовимірна матриця.")
     return scipy_norm(data, ord=order, axis=1)
 
 
 def row_norms_sklearn(data: np.ndarray, order: int) -> np.ndarray:
     """Обчислює відстань кожного рядка до нуля за допомогою scikit-learn."""
     validate_order(order)
+    if data.ndim != 2:
+        raise ValueError("Очікувалася двовимірна матриця.")
     origin = np.zeros((1, data.shape[1]), dtype=data.dtype)
     return pairwise_distances(
         data,
@@ -90,11 +104,21 @@ def row_norms_sklearn(data: np.ndarray, order: int) -> np.ndarray:
     ).ravel()
 
 
-def row_norms_torch(data: np.ndarray, order: int) -> np.ndarray:
+def row_norms_torch(data: np.ndarray | torch.Tensor, order: int) -> np.ndarray:
     """Обчислює норму кожного рядка за допомогою PyTorch."""
     validate_order(order)
-    tensor = torch.as_tensor(data.copy(), dtype=torch.float64)
+    if data.ndim != 2:
+        raise ValueError("Очікувалася двовимірна матриця.")
+    tensor = torch.as_tensor(data, dtype=torch.float64)
     return torch.linalg.vector_norm(tensor, ord=order, dim=1).cpu().numpy()
+
+
+def scale_features(
+    data: np.ndarray,
+    feature_range: tuple[float, float],
+) -> np.ndarray:
+    """Масштабує ознаки за допомогою MinMaxScaler."""
+    return MinMaxScaler(feature_range=feature_range).fit_transform(data)
 
 
 def compare_row_norms(data: np.ndarray, title: str) -> dict[int, np.ndarray]:
@@ -133,6 +157,24 @@ def compare_row_norms(data: np.ndarray, title: str) -> dict[int, np.ndarray]:
         )
 
     return numpy_scores_by_order
+
+
+def top_five_observations(
+    scores: np.ndarray,
+    labels: np.ndarray,
+    target_names: np.ndarray,
+) -> list[tuple[int, str, float]]:
+    """Повертає п'ять спостережень із найбільшими нормами."""
+    if scores.ndim != 1 or labels.ndim != 1:
+        raise ValueError("Оцінки й мітки мають бути одновимірними масивами.")
+    if len(scores) != len(labels):
+        raise ValueError("Кількість оцінок має збігатися з кількістю міток.")
+
+    indices = np.argsort(scores)[-5:][::-1]
+    return [
+        (int(index), str(target_names[labels[index]]), float(scores[index]))
+        for index in indices
+    ]
 
 
 def demonstrate_vector_norms() -> None:
@@ -185,7 +227,7 @@ def demonstrate_scaling_and_centering() -> None:
 
     print("\nЗавдання 4 і 6. Масштабування та центрування")
     for feature_range in ((0.0, 1.0), (-1.0, 1.0)):
-        scaled = MinMaxScaler(feature_range=feature_range).fit_transform(data)
+        scaled = scale_features(data, feature_range)
         compare_row_norms(
             scaled,
             f"Діапазон масштабування {feature_range}; відстань до нуля",
@@ -200,7 +242,7 @@ def demonstrate_iris() -> None:
     iris = load_iris()
     # Використовуємо довжину та ширину пелюстки кожної квітки.
     features = iris.data[:, 2:4]
-    scaled = MinMaxScaler().fit_transform(features)
+    scaled = scale_features(features, feature_range=(0.0, 1.0))
     centered = scaled - scaled.mean(axis=0)
 
     scores_by_order = compare_row_norms(
@@ -210,13 +252,15 @@ def demonstrate_iris() -> None:
 
     print("\nП'ять найбільших відхилень від середнього")
     for order, scores in scores_by_order.items():
-        largest_indices = np.argsort(scores)[-5:][::-1]
-        species_names = iris.target_names[iris.target[largest_indices]]
         print(f"L{order}:")
-        for index, species in zip(largest_indices, species_names):
+        for index, species, score in top_five_observations(
+            scores,
+            iris.target,
+            iris.target_names,
+        ):
             print(
                 f"  індекс={index}, вид={species}, "
-                f"норма={scores[index]:.4f}"
+                f"норма={score:.4f}"
             )
 
 
