@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360" role="img" aria-labelledby="title description">
+  <title id="title">Pipeline k-NN без витоку даних</title>
+  <desc id="description">Scaler навчається на тренувальній вибірці. Тією самою трансформацією перетворюються тренувальні дані й нові тестові точки, після чого k-NN шукає сусідів і прогнозує клас.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 23px; font-weight: 700; }
+    .label { font-size: 14px; }
+    .small { font-size: 12px; fill: #475569; }
+    .box { fill: #eff6ff; stroke: #3b82f6; stroke-width: 2; rx: 12; }
+    .green { fill: #f0fdf4; stroke: #16a34a; stroke-width: 2; rx: 12; }
+    .arrow { stroke: #475569; stroke-width: 2; marker-end: url(#arrow); }
+  </style>
+  <rect width="980" height="360" fill="#ffffff"/>
+  <text class="title" x="490" y="38" text-anchor="middle">k-NN Pipeline: навчаємо scaler тільки на train</text>
+
+  <rect class="box" x="35" y="105" width="170" height="72"/>
+  <text class="label" x="120" y="132" text-anchor="middle">X_train, y_train</text>
+  <text class="small" x="120" y="155" text-anchor="middle">тренувальні дані</text>
+
+  <rect class="green" x="270" y="105" width="170" height="72"/>
+  <text class="label" x="355" y="132" text-anchor="middle">Scaler.fit(X_train)</text>
+  <text class="small" x="355" y="155" text-anchor="middle">вивчити параметри</text>
+
+  <rect class="box" x="505" y="105" width="170" height="72"/>
+  <text class="label" x="590" y="132" text-anchor="middle">KNeighbors.fit</text>
+  <text class="small" x="590" y="155" text-anchor="middle">масштабовані точки + y</text>
+
+  <rect class="green" x="740" y="105" width="200" height="72"/>
+  <text class="label" x="840" y="132" text-anchor="middle">k найближчих</text>
+  <text class="small" x="840" y="155" text-anchor="middle">відстань, голосування</text>
+
+  <line class="arrow" x1="205" y1="141" x2="264" y2="141"/>
+  <line class="arrow" x1="440" y1="141" x2="499" y2="141"/>
+  <line class="arrow" x1="675" y1="141" x2="734" y2="141"/>
+
+  <rect x="270" y="240" width="170" height="64" fill="#fff7ed" stroke="#ea580c" stroke-width="2" rx="12"/>
+  <text class="label" x="355" y="266" text-anchor="middle">X_test</text>
+  <text class="small" x="355" y="287" text-anchor="middle">нова точка</text>
+  <line class="arrow" x1="440" y1="272" x2="740" y2="170"/>
+  <text class="small" x="590" y="252" text-anchor="middle">той самий scaler.transform</text>
+
+  <text class="small" x="490" y="330" text-anchor="middle">Якщо scaler навчається до поділу даних, статистики test можуть просочитися в train.</text>
+</svg>

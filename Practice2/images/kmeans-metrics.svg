@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="450" viewBox="0 0 980 450" role="img" aria-labelledby="title description">
+  <title id="title">Порівняння inertia та silhouette для K-Means</title>
+  <desc id="description">На точках 1, 2, 8, 9 inertia падає зі збільшенням K, але silhouette найвищий для K=2. Silhouette не визначається для K=1 та K=4.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 23px; font-weight: 700; }
+    .heading { font-size: 17px; font-weight: 700; }
+    .label { font-size: 13px; }
+    .small { font-size: 12px; fill: #475569; }
+    .grid { stroke: #e2e8f0; stroke-width: 1; }
+    .axis { stroke: #475569; stroke-width: 1.5; }
+  </style>
+  <rect width="980" height="450" fill="#ffffff"/>
+  <text class="title" x="490" y="34" text-anchor="middle">Чому одного inertia недостатньо для вибору K</text>
+
+  <rect x="25" y="55" width="450" height="345" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text class="heading" x="250" y="84" text-anchor="middle">Inertia: квадрат відстані до центра</text>
+  <line class="grid" x1="85" y1="110" x2="440" y2="110"/>
+  <line class="grid" x1="85" y1="150" x2="440" y2="150"/>
+  <line class="grid" x1="85" y1="190" x2="440" y2="190"/>
+  <line class="grid" x1="85" y1="230" x2="440" y2="230"/>
+  <line class="grid" x1="85" y1="270" x2="440" y2="270"/>
+  <line class="grid" x1="85" y1="310" x2="440" y2="310"/>
+  <line class="axis" x1="85" y1="310" x2="440" y2="310"/>
+  <line class="axis" x1="85" y1="110" x2="85" y2="310"/>
+  <polyline points="135,110 235,306 335,308 435,310" fill="none" stroke="#2563eb" stroke-width="3"/>
+  <circle cx="135" cy="110" r="6" fill="#2563eb"/>
+  <circle cx="235" cy="306" r="6" fill="#2563eb"/>
+  <circle cx="335" cy="308" r="6" fill="#2563eb"/>
+  <circle cx="435" cy="310" r="6" fill="#2563eb"/>
+  <text class="label" x="135" y="101" text-anchor="middle">50</text>
+  <text class="label" x="235" y="292" text-anchor="middle">1</text>
+  <text class="label" x="335" y="294" text-anchor="middle">0.5</text>
+  <text class="label" x="435" y="294" text-anchor="middle">0</text>
+  <text class="small" x="135" y="331" text-anchor="middle">K=1</text>
+  <text class="small" x="235" y="331" text-anchor="middle">K=2</text>
+  <text class="small" x="335" y="331" text-anchor="middle">K=3</text>
+  <text class="small" x="435" y="331" text-anchor="middle">K=4</text>
+  <text class="small" x="250" y="370" text-anchor="middle">Inertia завжди може зменшитися, якщо збільшити K.</text>
+
+  <rect x="505" y="55" width="450" height="345" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text class="heading" x="730" y="84" text-anchor="middle">Silhouette: відстані всередині та між групами</text>
+  <line class="grid" x1="565" y1="110" x2="920" y2="110"/>
+  <line class="grid" x1="565" y1="160" x2="920" y2="160"/>
+  <line class="grid" x1="565" y1="210" x2="920" y2="210"/>
+  <line class="grid" x1="565" y1="260" x2="920" y2="260"/>
+  <line class="grid" x1="565" y1="310" x2="920" y2="310"/>
+  <line class="axis" x1="565" y1="310" x2="920" y2="310"/>
+  <line class="axis" x1="565" y1="110" x2="565" y2="310"/>
+  <line x1="685" y1="139" x2="805" y2="203" fill="none" stroke="#ea580c" stroke-width="3"/>
+  <circle cx="685" cy="139" r="7" fill="#ea580c"/>
+  <circle cx="805" cy="203" r="7" fill="#ea580c"/>
+  <text class="label" x="685" y="126" text-anchor="middle">0.856</text>
+  <text class="label" x="805" y="190" text-anchor="middle">0.423</text>
+  <text class="small" x="595" y="221" text-anchor="middle">N/A</text>
+  <text class="small" x="895" y="221" text-anchor="middle">N/A</text>
+  <text class="small" x="595" y="331" text-anchor="middle">K=1</text>
+  <text class="small" x="685" y="331" text-anchor="middle">K=2</text>
+  <text class="small" x="805" y="331" text-anchor="middle">K=3</text>
+  <text class="small" x="895" y="331" text-anchor="middle">K=4</text>
+  <text class="small" x="730" y="370" text-anchor="middle">Для цих точок silhouette підтримує K=2.</text>
+</svg>

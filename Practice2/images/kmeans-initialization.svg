@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="560" viewBox="0 0 980 560" role="img" aria-labelledby="title description">
+  <title id="title">Ініціалізація та чутливість K-Means</title>
+  <desc id="description">Для точок 0,1,2,3,4 різні random_state при n_init=1 можуть дати inertia 2 або 1; повторні старти знаходять меншу inertia. Викид 20 змінює середнє з 2 на 5. K-Means ділить видовжену лінію на задані дві групи.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 23px; font-weight: 700; }
+    .heading { font-size: 16px; font-weight: 700; }
+    .label { font-size: 13px; }
+    .small { font-size: 12px; fill: #475569; }
+    .panel { fill: #f8fafc; stroke: #cbd5e1; }
+    .axis { stroke: #64748b; stroke-width: 2; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #ea580c; }
+  </style>
+  <rect width="980" height="560" fill="#ffffff"/>
+  <text class="title" x="490" y="34" text-anchor="middle">Три перевірки перед інтерпретацією K-Means</text>
+
+  <rect class="panel" x="25" y="55" width="930" height="145" rx="12"/>
+  <text class="heading" x="50" y="83">1. Різні старти можуть дати різну inertia (дані 0, 1, 2, 3, 4; K=3)</text>
+  <line class="axis" x1="90" y1="140" x2="510" y2="140"/>
+  <circle class="blue" cx="132" cy="140" r="8"/>
+  <circle class="blue" cx="174" cy="140" r="8"/>
+  <circle class="blue" cx="216" cy="140" r="8"/>
+  <circle class="blue" cx="258" cy="140" r="8"/>
+  <circle class="blue" cx="300" cy="140" r="8"/>
+  <text class="small" x="132" y="164" text-anchor="middle">0</text>
+  <text class="small" x="174" y="164" text-anchor="middle">1</text>
+  <text class="small" x="216" y="164" text-anchor="middle">2</text>
+  <text class="small" x="258" y="164" text-anchor="middle">3</text>
+  <text class="small" x="300" y="164" text-anchor="middle">4</text>
+  <text class="label" x="560" y="120">n_init=1, seed=0 → inertia=2</text>
+  <text class="label" x="560" y="147">n_init=1, seed=5 → inertia=1</text>
+  <text class="label" x="560" y="174">n_init=20, seed=7 → обирається кращий старт</text>
+
+  <rect class="panel" x="25" y="215" width="450" height="160" rx="12"/>
+  <text class="heading" x="250" y="243" text-anchor="middle">2. Викид зсуває середнє при K=1</text>
+  <line class="axis" x1="70" y1="310" x2="430" y2="310"/>
+  <circle class="blue" cx="100" cy="310" r="8"/>
+  <circle class="blue" cx="130" cy="310" r="8"/>
+  <circle class="blue" cx="160" cy="310" r="8"/>
+  <circle class="blue" cx="190" cy="310" r="8"/>
+  <circle class="blue" cx="220" cy="310" r="8"/>
+  <circle class="orange" cx="400" cy="310" r="9"/>
+  <text class="small" x="160" y="337" text-anchor="middle">0...4: μ=2, inertia=10</text>
+  <text class="small" x="400" y="337" text-anchor="middle">20</text>
+  <text class="label" x="250" y="361" text-anchor="middle">З викидом: μ=5, inertia=280</text>
+
+  <rect class="panel" x="505" y="215" width="450" height="160" rx="12"/>
+  <text class="heading" x="730" y="243" text-anchor="middle">3. Задане K ділить навіть одну лінію</text>
+  <line class="axis" x1="555" y1="310" x2="915" y2="310"/>
+  <line x1="735" y1="270" x2="735" y2="338" stroke="#111827" stroke-width="2" stroke-dasharray="6 4"/>
+  <circle class="blue" cx="575" cy="310" r="7"/>
+  <circle class="blue" cx="615" cy="310" r="7"/>
+  <circle class="blue" cx="655" cy="310" r="7"/>
+  <circle class="blue" cx="695" cy="310" r="7"/>
+  <circle class="blue" cx="735" cy="310" r="7"/>
+  <circle class="orange" cx="775" cy="310" r="7"/>
+  <circle class="orange" cx="815" cy="310" r="7"/>
+  <circle class="orange" cx="855" cy="310" r="7"/>
+  <circle class="orange" cx="895" cy="310" r="7"/>
+  <text class="small" x="735" y="356" text-anchor="middle">K=2 розділяє одну видовжену групу на дві частини</text>
+
+  <text class="small" x="490" y="426" text-anchor="middle">Inertia допомагає порівнювати старти, але не доводить, що групи мають предметний сенс.</text>
+  <text class="small" x="490" y="450" text-anchor="middle">Перевіряйте seed, n_init, форму даних, викиди та зовнішні знання про задачу.</text>
+</svg>

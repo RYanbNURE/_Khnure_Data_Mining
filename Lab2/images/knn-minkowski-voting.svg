@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="635" viewBox="0 0 920 635" role="img" aria-labelledby="title description">
+  <title id="title">Вплив p та k на голосування k-NN</title>
+  <desc id="description">Чотири панелі показують точки A1, B1, A2 та запит Q. За k=1 найближчий клас змінюється з A для p=1 на B для p=2 і p=3. За p=2 та k=3 більшість голосів за клас A.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 23px; font-weight: 700; }
+    .panel-title { font-size: 17px; font-weight: 700; }
+    .label { font-size: 13px; }
+    .small { font-size: 12px; fill: #475569; }
+    .panel { fill: #f8fafc; stroke: #cbd5e1; }
+    .axis { stroke: #64748b; stroke-width: 1.5; }
+    .grid { stroke: #e2e8f0; stroke-width: 1; }
+    .vote { stroke: #7c3aed; stroke-width: 2; stroke-dasharray: 5 4; }
+    .selected { stroke: #111827; stroke-width: 3; }
+    .class-a { fill: #ea580c; stroke: white; stroke-width: 2; }
+    .class-b { fill: #2563eb; stroke: white; stroke-width: 2; }
+    .query { fill: #111827; stroke: white; stroke-width: 2; }
+  </style>
+  <rect width="920" height="635" fill="#ffffff"/>
+  <text class="title" x="460" y="32" text-anchor="middle">k-NN: метрика вирішує, хто сусід, k — скільки голосують</text>
+
+  <g transform="translate(20 50)">
+    <rect class="panel" width="425" height="250" rx="12"/>
+    <text class="panel-title" x="14" y="25">p=1, k=1 → прогноз A</text>
+    <line class="grid" x1="55" y1="55" x2="365" y2="55"/>
+    <line class="grid" x1="55" y1="100" x2="365" y2="100"/>
+    <line class="grid" x1="55" y1="145" x2="365" y2="145"/>
+    <line class="axis" x1="55" y1="190" x2="365" y2="190"/>
+    <line class="axis" x1="55" y1="55" x2="55" y2="190"/>
+    <line class="selected" x1="55" y1="190" x2="55" y2="55"/>
+    <circle class="class-a" cx="55" cy="55" r="9"/>
+    <circle class="class-b" cx="210" cy="100" r="9"/>
+    <circle class="class-a" cx="365" cy="190" r="9"/>
+    <polygon class="query" points="55,178 67,190 55,202 43,190"/>
+    <text class="label" x="68" y="52">A₁</text>
+    <text class="label" x="222" y="98">B₁</text>
+    <text class="label" x="347" y="178">A₂</text>
+    <text class="label" x="69" y="207">Q</text>
+    <text class="small" x="210" y="220" text-anchor="middle">Найближча A₁: d₁=3; d₁(B₁)=d₁(A₂)=4</text>
+    <text class="small" x="210" y="239" text-anchor="middle">Голосує один найближчий сусід: клас A</text>
+  </g>
+
+  <g transform="translate(475 50)">
+    <rect class="panel" width="425" height="250" rx="12"/>
+    <text class="panel-title" x="14" y="25">p=2, k=1 → прогноз B</text>
+    <line class="grid" x1="55" y1="55" x2="365" y2="55"/>
+    <line class="grid" x1="55" y1="100" x2="365" y2="100"/>
+    <line class="grid" x1="55" y1="145" x2="365" y2="145"/>
+    <line class="axis" x1="55" y1="190" x2="365" y2="190"/>
+    <line class="axis" x1="55" y1="55" x2="55" y2="190"/>
+    <line class="selected" x1="55" y1="190" x2="210" y2="100"/>
+    <circle class="class-a" cx="55" cy="55" r="9"/>
+    <circle class="class-b" cx="210" cy="100" r="9"/>
+    <circle class="class-a" cx="365" cy="190" r="9"/>
+    <polygon class="query" points="55,178 67,190 55,202 43,190"/>
+    <text class="label" x="68" y="52">A₁</text>
+    <text class="label" x="222" y="98">B₁</text>
+    <text class="label" x="347" y="178">A₂</text>
+    <text class="label" x="69" y="207">Q</text>
+    <text class="small" x="210" y="220" text-anchor="middle">d₂(B₁)=√8≈2.828 &lt; d₂(A₁)=3</text>
+    <text class="small" x="210" y="239" text-anchor="middle">Найближчий сусід належить класу B</text>
+  </g>
+
+  <g transform="translate(20 315)">
+    <rect class="panel" width="425" height="250" rx="12"/>
+    <text class="panel-title" x="14" y="25">p=3, k=1 → прогноз B</text>
+    <line class="grid" x1="55" y1="55" x2="365" y2="55"/>
+    <line class="grid" x1="55" y1="100" x2="365" y2="100"/>
+    <line class="grid" x1="55" y1="145" x2="365" y2="145"/>
+    <line class="axis" x1="55" y1="190" x2="365" y2="190"/>
+    <line class="axis" x1="55" y1="55" x2="55" y2="190"/>
+    <line class="selected" x1="55" y1="190" x2="210" y2="100"/>
+    <circle class="class-a" cx="55" cy="55" r="9"/>
+    <circle class="class-b" cx="210" cy="100" r="9"/>
+    <circle class="class-a" cx="365" cy="190" r="9"/>
+    <polygon class="query" points="55,178 67,190 55,202 43,190"/>
+    <text class="label" x="68" y="52">A₁</text>
+    <text class="label" x="222" y="98">B₁</text>
+    <text class="label" x="347" y="178">A₂</text>
+    <text class="label" x="69" y="207">Q</text>
+    <text class="small" x="210" y="220" text-anchor="middle">d₃(B₁)=∛16≈2.520 &lt; d₃(A₁)=3</text>
+    <text class="small" x="210" y="239" text-anchor="middle">Зміна p змінила найближчу точку з A₁ на B₁</text>
+  </g>
+
+  <g transform="translate(475 315)">
+    <rect class="panel" width="425" height="250" rx="12"/>
+    <text class="panel-title" x="14" y="25">p=2, k=3 → прогноз A</text>
+    <line class="grid" x1="55" y1="55" x2="365" y2="55"/>
+    <line class="grid" x1="55" y1="100" x2="365" y2="100"/>
+    <line class="grid" x1="55" y1="145" x2="365" y2="145"/>
+    <line class="axis" x1="55" y1="190" x2="365" y2="190"/>
+    <line class="axis" x1="55" y1="55" x2="55" y2="190"/>
+    <line class="vote" x1="55" y1="190" x2="55" y2="55"/>
+    <line class="vote" x1="55" y1="190" x2="210" y2="100"/>
+    <line class="vote" x1="55" y1="190" x2="365" y2="190"/>
+    <circle class="class-a" cx="55" cy="55" r="9"/>
+    <circle class="class-b" cx="210" cy="100" r="9"/>
+    <circle class="class-a" cx="365" cy="190" r="9"/>
+    <polygon class="query" points="55,178 67,190 55,202 43,190"/>
+    <text class="label" x="68" y="52">A₁</text>
+    <text class="label" x="222" y="98">B₁</text>
+    <text class="label" x="347" y="178">A₂</text>
+    <text class="label" x="69" y="207">Q</text>
+    <text class="small" x="210" y="220" text-anchor="middle">Три сусіди голосують: A₁, B₁, A₂</text>
+    <text class="small" x="210" y="239" text-anchor="middle">A має 2 голоси, B — 1: перемагає клас A</text>
+  </g>
+
+  <circle class="class-a" cx="305" cy="600" r="8"/>
+  <text class="small" x="320" y="605">клас A</text>
+  <circle class="class-b" cx="405" cy="600" r="8"/>
+  <text class="small" x="420" y="605">клас B</text>
+  <polygon class="query" points="535,590 545,600 535,610 525,600"/>
+  <text class="small" x="552" y="605">точка Q, клас якої треба передбачити</text>
+</svg>

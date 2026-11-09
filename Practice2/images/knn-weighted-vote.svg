@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="940" height="420" viewBox="0 0 940 420" role="img" aria-labelledby="title description">
+  <title id="title">Рівне та зважене голосування k-NN</title>
+  <desc id="description">Для трьох сусідів рівне голосування вибирає A з двома голосами проти одного. Вага 1 на відстань надає класу B суму 4 проти 1,5 для A. Точний збіг відстані 0 обробляється окремо.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 23px; font-weight: 700; }
+    .heading { font-size: 17px; font-weight: 700; }
+    .label { font-size: 14px; }
+    .small { font-size: 12px; fill: #475569; }
+    .panel { fill: #f8fafc; stroke: #cbd5e1; }
+    .axis { stroke: #94a3b8; stroke-width: 1; }
+    .a { fill: #ea580c; }
+    .b { fill: #2563eb; }
+  </style>
+  <rect width="940" height="420" fill="#ffffff"/>
+  <text class="title" x="470" y="34" text-anchor="middle">Голос сусіда залежить від способу зважування</text>
+
+  <rect class="panel" x="25" y="58" width="430" height="265" rx="12"/>
+  <text class="heading" x="240" y="88" text-anchor="middle">Uniform, k=3</text>
+  <line class="axis" x1="80" y1="245" x2="420" y2="245"/>
+  <rect class="a" x="145" y="135" width="70" height="110" rx="6"/>
+  <rect class="b" x="270" y="190" width="70" height="55" rx="6"/>
+  <text class="label" x="180" y="125" text-anchor="middle">A: 2 голоси</text>
+  <text class="label" x="305" y="180" text-anchor="middle">B: 1 голос</text>
+  <text class="small" x="180" y="270" text-anchor="middle">2 точки A</text>
+  <text class="small" x="305" y="270" text-anchor="middle">1 точка B</text>
+  <text class="heading" x="240" y="305" text-anchor="middle">Прогноз: A</text>
+
+  <rect class="panel" x="485" y="58" width="430" height="265" rx="12"/>
+  <text class="heading" x="700" y="88" text-anchor="middle">Distance weights, k=3</text>
+  <line class="axis" x1="540" y1="245" x2="880" y2="245"/>
+  <rect class="a" x="605" y="203.75" width="70" height="41.25" rx="6"/>
+  <rect class="b" x="730" y="135" width="70" height="110" rx="6"/>
+  <text class="label" x="640" y="194" text-anchor="middle">A: 1+0.5=1.5</text>
+  <text class="label" x="765" y="125" text-anchor="middle">B: 1/0.25=4</text>
+  <text class="small" x="640" y="270" text-anchor="middle">A1 d=1, A2 d=2</text>
+  <text class="small" x="765" y="270" text-anchor="middle">B1 d=0.25</text>
+  <text class="heading" x="700" y="305" text-anchor="middle">Прогноз: B</text>
+
+  <rect x="120" y="345" width="700" height="54" rx="10" fill="#fff7ed" stroke="#ea580c"/>
+  <text class="label" x="470" y="369" text-anchor="middle">Якщо d=0, 1/d не визначене.</text>
+  <text class="small" x="470" y="389" text-anchor="middle">У прикладі точні збіги голосують між собою; далекі точки не додають вагу.</text>
+</svg>

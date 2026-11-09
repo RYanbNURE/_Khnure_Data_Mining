@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="500" viewBox="0 0 960 500" role="img" aria-labelledby="title description">
+  <title id="title">Одна ітерація K-Means на чотирьох точках</title>
+  <desc id="description">Точки 1 і 2 групуються біля початкового центра 2, а точки 8 і 9 біля центра 8. Нові центри дорівнюють 1,5 і 8,5; inertia дорівнює 1.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 24px; font-weight: 700; }
+    .heading { font-size: 17px; font-weight: 700; }
+    .label { font-size: 14px; }
+    .small { font-size: 13px; fill: #475569; }
+    .axis { stroke: #64748b; stroke-width: 2; }
+    .guide { stroke: #475569; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #ea580c; }
+  </style>
+  <rect width="960" height="500" fill="#ffffff"/>
+  <text class="title" x="480" y="36" text-anchor="middle">K-Means на даних x = {1, 2, 8, 9}</text>
+
+  <rect x="30" y="58" width="900" height="160" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text class="heading" x="58" y="88">Початкові центри μ₁=2 та μ₂=8: призначаємо найближчі точки</text>
+  <line class="axis" x1="110" y1="150" x2="850" y2="150"/>
+  <line class="guide" x1="258" y1="110" x2="258" y2="162"/>
+  <line class="guide" x1="702" y1="110" x2="702" y2="162"/>
+  <polygon points="258,106 266,114 258,122 250,114" fill="#111827"/>
+  <polygon points="702,106 710,114 702,122 694,114" fill="#111827"/>
+  <circle class="blue" cx="184" cy="150" r="10"/>
+  <circle class="blue" cx="258" cy="150" r="10"/>
+  <circle class="orange" cx="702" cy="150" r="10"/>
+  <circle class="orange" cx="776" cy="150" r="10"/>
+  <text class="small" x="184" y="180" text-anchor="middle">1</text>
+  <text class="small" x="258" y="180" text-anchor="middle">2</text>
+  <text class="small" x="702" y="180" text-anchor="middle">8</text>
+  <text class="small" x="776" y="180" text-anchor="middle">9</text>
+  <text class="small" x="140" y="205">Кластер 1</text>
+  <text class="small" x="760" y="205">Кластер 2</text>
+
+  <rect x="30" y="235" width="900" height="160" rx="12" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text class="heading" x="58" y="265">Після перерахунку середніх: μ₁=(1+2)/2=1.5, μ₂=(8+9)/2=8.5</text>
+  <line class="axis" x1="110" y1="327" x2="850" y2="327"/>
+  <line class="guide" x1="221" y1="287" x2="221" y2="339"/>
+  <line class="guide" x1="739" y1="287" x2="739" y2="339"/>
+  <polygon points="221,283 229,291 221,299 213,291" fill="#111827"/>
+  <polygon points="739,283 747,291 739,299 731,291" fill="#111827"/>
+  <circle class="blue" cx="184" cy="327" r="10"/>
+  <circle class="blue" cx="258" cy="327" r="10"/>
+  <circle class="orange" cx="702" cy="327" r="10"/>
+  <circle class="orange" cx="776" cy="327" r="10"/>
+  <text class="small" x="184" y="357" text-anchor="middle">1</text>
+  <text class="small" x="258" y="357" text-anchor="middle">2</text>
+  <text class="small" x="702" y="357" text-anchor="middle">8</text>
+  <text class="small" x="776" y="357" text-anchor="middle">9</text>
+  <text class="small" x="58" y="381">Призначення залишилися тими самими: наступна ітерація зупинить алгоритм.</text>
+
+  <text class="heading" x="480" y="444" text-anchor="middle">Inertia J = 4 × 0.5² = 1</text>
+  <circle class="blue" cx="765" cy="440" r="7"/>
+  <text class="small" x="778" y="445">кластер 1</text>
+  <circle class="orange" cx="864" cy="440" r="7"/>
+  <text class="small" x="877" y="445">кластер 2</text>
+</svg>

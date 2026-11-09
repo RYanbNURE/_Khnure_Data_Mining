@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="400" viewBox="0 0 980 400" role="img" aria-labelledby="title description">
+  <title id="title">K-Means і k-NN відповідають на різні запитання</title>
+  <desc id="description">K-Means отримує тільки ознаки та повертає номери кластерів. k-NN отримує ознаки з відомими мітками й передбачає клас нової точки.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 24px; font-weight: 700; }
+    .heading { font-size: 18px; font-weight: 700; }
+    .label { font-size: 14px; }
+    .small { font-size: 12px; fill: #475569; }
+    .panel { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 2; }
+    .blue { fill: #dbeafe; stroke: #2563eb; stroke-width: 2; }
+    .orange { fill: #ffedd5; stroke: #ea580c; stroke-width: 2; }
+    .arrow { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect width="980" height="400" fill="#ffffff"/>
+  <text class="title" x="490" y="36" text-anchor="middle">Одна матриця X — дві різні задачі</text>
+
+  <rect class="panel" x="30" y="70" width="430" height="285" rx="14"/>
+  <text class="heading" x="245" y="105" text-anchor="middle">K-Means: без учителя</text>
+  <rect class="blue" x="65" y="140" width="145" height="64" rx="10"/>
+  <text class="label" x="137" y="168" text-anchor="middle">Ознаки X</text>
+  <text class="small" x="137" y="188" text-anchor="middle">без міток y</text>
+  <rect class="blue" x="275" y="140" width="145" height="64" rx="10"/>
+  <text class="label" x="347" y="168" text-anchor="middle">K-Means</text>
+  <text class="small" x="347" y="188" text-anchor="middle">заданий K</text>
+  <path class="arrow" d="M210 172 L268 172"/>
+  <rect class="blue" x="155" y="250" width="175" height="64" rx="10"/>
+  <text class="label" x="242" y="278" text-anchor="middle">Cluster ID</text>
+  <text class="small" x="242" y="298" text-anchor="middle">номер групи, не назва виду</text>
+  <path class="arrow" d="M347 204 L347 225 L300 245"/>
+
+  <rect class="panel" x="520" y="70" width="430" height="285" rx="14"/>
+  <text class="heading" x="735" y="105" text-anchor="middle">k-NN: з учителем</text>
+  <rect class="orange" x="555" y="140" width="145" height="64" rx="10"/>
+  <text class="label" x="627" y="168" text-anchor="middle">X_train, y_train</text>
+  <text class="small" x="627" y="188" text-anchor="middle">відомі класи</text>
+  <rect class="orange" x="765" y="140" width="145" height="64" rx="10"/>
+  <text class="label" x="837" y="168" text-anchor="middle">k-NN</text>
+  <text class="small" x="837" y="188" text-anchor="middle">сусіди голосують</text>
+  <path class="arrow" d="M700 172 L758 172"/>
+  <rect class="orange" x="655" y="250" width="175" height="64" rx="10"/>
+  <text class="label" x="742" y="278" text-anchor="middle">Передбачений клас</text>
+  <text class="small" x="742" y="298" text-anchor="middle">назва з набору y_train</text>
+  <path class="arrow" d="M837 204 L837 225 L800 245"/>
+
+  <text class="small" x="490" y="382" text-anchor="middle">K-Means шукає групи; k-NN використовує приклади з відомими відповідями.</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="520" viewBox="0 0 1000 520" role="img" aria-labelledby="title description">
+  <title id="title">Ручна ітерація K-Means на чотирьох точках</title>
+  <desc id="description">Точки 1 і 2 призначено центру 2, точки 8 і 9 — центру 8. Після перерахунку центри дорівнюють 1,5 та 8,5, а сума квадратів відстаней дорівнює 1.</desc>
+  <style>
+    text { font-family: "Segoe UI", Arial, sans-serif; fill: #1f2937; }
+    .title { font-size: 25px; font-weight: 700; }
+    .heading { font-size: 18px; font-weight: 700; }
+    .label { font-size: 15px; }
+    .small { font-size: 13px; fill: #4b5563; }
+    .axis { stroke: #64748b; stroke-width: 2; }
+    .guide { stroke: #64748b; stroke-width: 1.5; stroke-dasharray: 6 5; }
+    .blue { fill: #2563eb; }
+    .orange { fill: #ea580c; }
+    .center { fill: #111827; stroke: white; stroke-width: 2; }
+  </style>
+  <rect width="1000" height="520" fill="#ffffff"/>
+  <text class="title" x="500" y="38" text-anchor="middle">K-Means: одна ітерація на простих даних</text>
+
+  <rect x="35" y="58" width="930" height="185" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text class="heading" x="65" y="88">1. Призначаємо точки до початкових центрів μ₁=2 та μ₂=8</text>
+  <line class="axis" x1="130" y1="170" x2="830" y2="170"/>
+  <line class="guide" x1="270" y1="112" x2="270" y2="181"/>
+  <line class="guide" x1="690" y1="112" x2="690" y2="181"/>
+  <polygon class="center" points="270,120 278,128 270,136 262,128"/>
+  <polygon class="center" points="690,120 698,128 690,136 682,128"/>
+  <text class="label" x="270" y="111" text-anchor="middle">центр 2</text>
+  <text class="label" x="690" y="111" text-anchor="middle">центр 8</text>
+  <circle class="blue" cx="200" cy="170" r="10"/>
+  <circle class="blue" cx="270" cy="170" r="10"/>
+  <circle class="orange" cx="690" cy="170" r="10"/>
+  <circle class="orange" cx="760" cy="170" r="10"/>
+  <text class="small" x="200" y="199" text-anchor="middle">x=1</text>
+  <text class="small" x="270" y="199" text-anchor="middle">x=2</text>
+  <text class="small" x="690" y="199" text-anchor="middle">x=8</text>
+  <text class="small" x="760" y="199" text-anchor="middle">x=9</text>
+  <text class="small" x="65" y="226">Синій кластер: {1, 2}</text>
+  <text class="small" x="270" y="226">Помаранчевий кластер: {8, 9}</text>
+
+  <rect x="35" y="258" width="930" height="185" rx="14" fill="#f8fafc" stroke="#cbd5e1"/>
+  <text class="heading" x="65" y="288">2. Перераховуємо центри як середні значення точок</text>
+  <line class="axis" x1="130" y1="369" x2="830" y2="369"/>
+  <line class="guide" x1="235" y1="312" x2="235" y2="380"/>
+  <line class="guide" x1="725" y1="312" x2="725" y2="380"/>
+  <polygon class="center" points="235,320 243,328 235,336 227,328"/>
+  <polygon class="center" points="725,320 733,328 725,336 717,328"/>
+  <text class="label" x="235" y="311" text-anchor="middle">μ₁=1.5</text>
+  <text class="label" x="725" y="311" text-anchor="middle">μ₂=8.5</text>
+  <circle class="blue" cx="200" cy="369" r="10"/>
+  <circle class="blue" cx="270" cy="369" r="10"/>
+  <circle class="orange" cx="690" cy="369" r="10"/>
+  <circle class="orange" cx="760" cy="369" r="10"/>
+  <text class="small" x="200" y="398" text-anchor="middle">x=1</text>
+  <text class="small" x="270" y="398" text-anchor="middle">x=2</text>
+  <text class="small" x="690" y="398" text-anchor="middle">x=8</text>
+  <text class="small" x="760" y="398" text-anchor="middle">x=9</text>
+  <text class="small" x="65" y="426">Призначення не змінилися — алгоритм зупиняється.</text>
+
+  <text class="heading" x="500" y="486" text-anchor="middle">J = 0.25 + 0.25 + 0.25 + 0.25 = 1</text>
+  <circle class="blue" cx="737" cy="482" r="7"/>
+  <text class="small" x="750" y="487">кластер 1</text>
+  <circle class="orange" cx="845" cy="482" r="7"/>
+  <text class="small" x="858" y="487">кластер 2</text>
+</svg>

@@ -1,0 +1,44 @@
+# --- Python cache files ---
+__pycache__/
+*.py[cod]
+*.pyo
+
+# --- Virtual environments ---
+venv/
+.env/
+.venv/
+.venv-py313/
+.venv-stable/
+env/
+ENV/
+
+# --- Distribution / packaging ---
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+
+# --- Unit test / coverage ---
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+pytest_cache/
+.pytest_cache/
+
+# --- Jupyter Notebook checkpoints ---
+.ipynb_checkpoints/
+
+# --- Environment / secrets ---
+*.env
+*.ini
+*.cfg
+
+# --- IDE / editor files ---
+.vscode/
+.idea/
+*.swp
+*.swo
